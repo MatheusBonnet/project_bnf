@@ -34,8 +34,10 @@ public class UserAuthenticationService {
 	}
 	
 	public User authenticate(DadosLogin dados, String token){
-		User user = usuarioRepo.findById(dados.getCpf());
+		User user = usuarioRepo.findByEmail(dados.getEmail());
         if(dados.getPassword().equals(user.getPassword()) && !token.isEmpty() && validate(token)) {
+            String newToken  = tokenService.generateToken(user);
+            user.setToken(newToken);
             return user;
         }
         else {
@@ -47,9 +49,6 @@ public class UserAuthenticationService {
         try {
             String tokenTratado = token.replace("Bearer ", "");
             Claims claims = tokenService.decodeToken(tokenTratado);
-
-            System.out.println(claims.getIssuer());
-            System.out.println(claims.getIssuedAt());
             //Verifica se o token está expirado
             if (claims.getExpiration().before(new Date(System.currentTimeMillis()))) throw new ExpiredTokenException();
             return true;

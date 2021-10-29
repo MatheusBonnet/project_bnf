@@ -1,15 +1,16 @@
 package com.bnf.aep.services;
 
+import com.bnf.aep.DTO.UserDTO;
 import com.bnf.aep.entities.User;
 
 public interface IUserService {
 
-	public Boolean atualizarUsuario(final User Usuario);
+	public UserDTO atualizarUsuario(final UserDTO Usuario);
 	
-	public Boolean deletar(final Long id);
+	public UserDTO deletar(final Long cpf );
 	
-	public User buscaPorId(final Long id);
+	public User buscaPorId(final Long cpf);
 	
-	public Boolean cadastrarUsuario(final User Usuario);
+	public void cadastrarUsuario(final User Usuario);
 
 }

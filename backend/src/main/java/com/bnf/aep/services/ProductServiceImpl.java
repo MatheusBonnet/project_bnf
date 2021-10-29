@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -49,9 +51,9 @@ public class ProductServiceImpl implements IProductService {
 	}
 
 	@Override
-	public List<ProductsDTO> listarTodas() {
+	public Page<ProductsDTO> listarTodas(Pageable page) {
 		try {
-			List<ProductsDTO> produto = this.mapper.map(this.produtoRepository.findAll(),
+			Page<ProductsDTO> produto = this.mapper.map(this.produtoRepository.findAll(page),
 					new TypeToken<List<ProductsDTO>>() {
 					}.getType());
 

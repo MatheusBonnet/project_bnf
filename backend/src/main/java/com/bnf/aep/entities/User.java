@@ -3,13 +3,11 @@ package com.bnf.aep.entities;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -25,13 +23,9 @@ public class User implements Serializable{
 
 	private static final long serialVersionUID = 260616964148689036L;
 
-
-	@JsonInclude(Include.NON_NULL)
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	
 	@JsonInclude(Include.NON_EMPTY)
 	private String nome;
@@ -50,23 +44,21 @@ public class User implements Serializable{
 	
 	private String token;
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "doador_id")
+	@OneToMany(fetch = FetchType.LAZY)	
 	private List<Products> doacao;
 	
 	public User() {
 	}
 
-	public User(Long id, String nome, String cpf, String email, String endereco, String password, List<Products> doacao) {
+	public User(String nome, String cpf, String email, String endereco, String password, Long id) {
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
 		this.endereco = endereco;
 		this.password = password;
-		this.doacao = doacao;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -127,4 +119,28 @@ public class User implements Serializable{
 		return doacao;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (cpf == null) {
+			if (other.cpf != null)
+				return false;
+		} else if (!cpf.equals(other.cpf))
+			return false;
+		return true;
+	}
 }

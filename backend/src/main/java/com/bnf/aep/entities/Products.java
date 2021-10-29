@@ -12,21 +12,18 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @Entity
 public class Products {
 
-	@JsonInclude(Include.NON_NULL)
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	
-	@JsonInclude(Include.NON_NULL)
+	@JsonInclude(Include.NON_EMPTY)
 	private String descricao;
 	
 	@JsonInclude(Include.NON_EMPTY)
 	@Column(name = "tipo_produto")
 	private String produto;
 	
-	
-	@Column(name = "valor/quantidade")
+	@JsonInclude(Include.NON_EMPTY)
 	private Double valor;
 	
 	public Products() {

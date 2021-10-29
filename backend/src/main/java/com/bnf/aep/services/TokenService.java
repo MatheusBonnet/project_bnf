@@ -24,10 +24,10 @@ public class TokenService {
 				.compact();
 	}
 
-	public Claims decodeToken(String tokenTratado) {
+	public Claims decodeToken(String token) {
 		return Jwts.parser()
                 .setSigningKey(key)
-                .parseClaimsJws(tokenTratado)
+                .parseClaimsJws(token)
                 .getBody();
 	}
 

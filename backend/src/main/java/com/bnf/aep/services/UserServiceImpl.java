@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.bnf.aep.DTO.UserDTO;
 import com.bnf.aep.entities.User;
 import com.bnf.aep.exception.UserException;
 import com.bnf.aep.repositories.IUserRepository;
@@ -34,11 +35,11 @@ public class UserServiceImpl implements IUserService {
 
 
 	@Override
-	public Boolean deletar(Long id) {
+	public UserDTO deletar(Long id) throws UserException{
 		try {
 			this.buscaPorId(id);
 			this.usuarioRepository.deleteById(id);
-			return Boolean.TRUE;
+			return null;
 			
 		}catch (UserException m) {
 			throw m;
@@ -49,7 +50,7 @@ public class UserServiceImpl implements IUserService {
 
 
 	@Override
-	public User buscaPorId(Long id) {
+	public User buscaPorId(Long id) throws UserException{
 		try {
 			Optional<User> daodorOptional = this.usuarioRepository.findById(id);
 			if (daodorOptional.isPresent()) {
@@ -64,23 +65,22 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public Boolean atualizarUsuario(User Usuario) {
+	public UserDTO atualizarUsuario(UserDTO Usuario) throws UserException{
 		try {
-			this.buscaPorId(Usuario.getId());
-			return this.atualizarUsuario(Usuario);
+			this.atualizarUsuario(Usuario);
 		} catch (UserException c) {
 			throw c;
 		} catch (Exception e) {
 			throw e;
 		}
+		return null;
 	}
 
 	@Override
-	public Boolean cadastrarUsuario(User usuario) {
+	public void cadastrarUsuario(User usuario) throws UserException{
 		try {
 			User user = this.mapper.map(usuario, User.class);
 			usuarioRepository.save(user);
-			return Boolean.TRUE;
 		}catch (Exception e) {
 			throw new UserException(MESSAGE_ERRO_CADASTRO, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
