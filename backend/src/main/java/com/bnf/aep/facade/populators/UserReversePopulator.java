@@ -15,7 +15,6 @@ public class UserReversePopulator implements Populator<UserDTO, User>{
 		source.setCpf(target.getCpf());
 		source.setEndereco(target.getEndereco());
 		source.setPassword(target.getPassword());
-		source.setToken(target.getToken());
 	}
 
 }

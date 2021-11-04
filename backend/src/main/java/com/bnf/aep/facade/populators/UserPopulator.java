@@ -15,6 +15,5 @@ public class UserPopulator implements Populator<User, UserDTO>{
 		target.setCpf(source.getCpf());
 		target.setEndereco(source.getEndereco());
 		target.setPassword(source.getPassword());
-		target.setToken(target.getToken());
 	}	
 }

@@ -36,7 +36,15 @@ public class UserFacade {
 	public User registerUser(UserDTO userDTO) {
 		User user = new User();
 		getUserReversePopulator().populate(userDTO, user);
-		getUserService().cadastrarUsuario(user);
+		getUserService().saveUser(userDTO);
 		return user;
 	}
+	
+	public User updateDataUser(UserDTO userDTO) {
+		User user = new User();
+		getUserReversePopulator().populate(userDTO, user);
+		getUserService().atualizarUsuario(userDTO);
+		return user;
+	}
+	
 }

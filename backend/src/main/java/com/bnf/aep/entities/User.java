@@ -42,8 +42,6 @@ public class User implements Serializable{
 	@JsonInclude(Include.NON_EMPTY)
 	private String password;
 	
-	private String token;
-	
 	@OneToMany(fetch = FetchType.LAZY)	
 	private List<Products> doacao;
 	
@@ -105,14 +103,6 @@ public class User implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
 	}
 
 	public List<Products> getDoacao() {

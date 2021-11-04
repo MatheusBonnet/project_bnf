@@ -2,8 +2,6 @@ package com.bnf.aep.DTO;
 
 import org.springframework.hateoas.RepresentationModel;
 
-import com.bnf.aep.entities.User;
-
 public class UserDTO extends RepresentationModel<UserDTO>{
 	
 	private Long id;
@@ -19,28 +17,12 @@ public class UserDTO extends RepresentationModel<UserDTO>{
 	private String password;
 	
 	private String tipo;
-	
-	private String token;
+
 	
 	public UserDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserDTO(Long id, String nome, String cpf, String endereco, String email, String password, String tipo, String token) {
-		this.id = id;
-		this.nome = nome;
-		this.cpf = cpf;
-		this.endereco = endereco;
-		this.email = email;
-		this.password = password;
-		this.tipo = tipo;
-		this.token = token;
-	}
-		 
-	 public static UserDTO toDTO(User user, String tipo) {
-	        return new UserDTO(user.getId(), user.getNome(), user.getCpf(), 
-	        		user.getEmail(), user.getEndereco() , user.getPassword(), tipo, user.getToken());
-	 }
 	 
 	public Long getId() {
 		return id;
@@ -88,14 +70,6 @@ public class UserDTO extends RepresentationModel<UserDTO>{
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
 	}
 
 	public String getTipo() {

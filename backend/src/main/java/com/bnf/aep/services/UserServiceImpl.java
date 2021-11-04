@@ -5,27 +5,36 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.bnf.aep.DTO.UserDTO;
 import com.bnf.aep.entities.User;
 import com.bnf.aep.exception.UserException;
+import com.bnf.aep.facade.UserFacade;
 import com.bnf.aep.repositories.IUserRepository;
+import com.bnf.aep.security.UserData;
 
 
 @Service
-public class UserServiceImpl implements IUserService {
+@Component
+public class UserServiceImpl implements IUserService,UserDetailsService {
 
 	public static final String MESSAGE_ERROR = "Erro interno no servidor, consulte o suporte!!!";
 	
 	public static final String MESSAGE_ERROR_DOADOR_NOT_FOUND = "Usuario nao encontrado, tente novamente.";
 
-	private static final String MESSAGE_ERRO_CADASTRO = "Usuario já possui cadastro.";
 	
 	@Autowired
 	private IUserRepository usuarioRepository;
 	
 	private ModelMapper mapper;
+	
+	@Autowired
+	private UserFacade userfacade;
 	
 	@Autowired
 	public UserServiceImpl(IUserRepository usuarioRepository) {
@@ -40,11 +49,9 @@ public class UserServiceImpl implements IUserService {
 			this.buscaPorId(id);
 			this.usuarioRepository.deleteById(id);
 			return null;
-			
+						
 		}catch (UserException m) {
-			throw m;
-		} catch (Exception e) {
-			throw e;
+			throw new UserException(MESSAGE_ERROR_DOADOR_NOT_FOUND,HttpStatus.NOT_FOUND);
 		}
 	}
 
@@ -65,25 +72,35 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public UserDTO atualizarUsuario(UserDTO Usuario) throws UserException{
+	public User atualizarUsuario(UserDTO usuario) throws UserException{
 		try {
-			this.atualizarUsuario(Usuario);
+			userfacade.updateDataUser(usuario);
+			return null;
 		} catch (UserException c) {
 			throw c;
-		} catch (Exception e) {
-			throw e;
 		}
-		return null;
 	}
+		
+	@Override
+    public UserDetails loadUserByUsername(String cpf) throws UsernameNotFoundException {
+        Optional<User> usuario = usuarioRepository.findByCpf(cpf);
+        if (usuario.isEmpty()) {
+            throw new UsernameNotFoundException("User " + cpf + "not found");
+        }
+
+        return new UserData(usuario);
+    }
+
 
 	@Override
-	public void cadastrarUsuario(User usuario) throws UserException{
+	public User saveUser(UserDTO user) throws UserException {
 		try {
-			User user = this.mapper.map(usuario, User.class);
-			usuarioRepository.save(user);
-		}catch (Exception e) {
-			throw new UserException(MESSAGE_ERRO_CADASTRO, HttpStatus.INTERNAL_SERVER_ERROR);
+			return userfacade.registerUser(user);
+		} catch (UserException c) {
+			throw c;
 		}
 	}
+
+
 	
 }
