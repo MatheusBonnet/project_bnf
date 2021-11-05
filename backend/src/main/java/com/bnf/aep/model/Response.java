@@ -38,6 +38,5 @@ public class Response<T> extends RepresentationModel<Response<T>>{
 		this.timeStamp = timeStamp;
 	}
 	
-	
 
 }

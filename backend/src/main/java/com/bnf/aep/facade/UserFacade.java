@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.bnf.aep.DTO.UserDTO;
 import com.bnf.aep.entities.User;
 import com.bnf.aep.facade.populators.Populator;
+import com.bnf.aep.repositories.IUserRepository;
 import com.bnf.aep.services.IUserService;
 
 @Service
@@ -16,6 +17,10 @@ public class UserFacade {
 	
 	@Autowired
 	private IUserService userService;
+	
+	
+	@Autowired
+	private IUserRepository repository;
 
 	public Populator<UserDTO, User> getUserReversePopulator() {
 		return userReversePopulator;
@@ -33,18 +38,27 @@ public class UserFacade {
 		this.userReversePopulator = userReversePopulator;
 	}
 	
+	public IUserRepository getRepository() {
+		return repository;
+	}
+
+	public void setRepository(IUserRepository repository) {
+		this.repository = repository;
+	}
+	
 	public User registerUser(UserDTO userDTO) {
 		User user = new User();
 		getUserReversePopulator().populate(userDTO, user);
-		getUserService().saveUser(userDTO);
+		getRepository().save(user);
 		return user;
 	}
 	
 	public User updateDataUser(UserDTO userDTO) {
 		User user = new User();
 		getUserReversePopulator().populate(userDTO, user);
-		getUserService().atualizarUsuario(userDTO);
+		getRepository().save(user);
 		return user;
 	}
+
 	
 }

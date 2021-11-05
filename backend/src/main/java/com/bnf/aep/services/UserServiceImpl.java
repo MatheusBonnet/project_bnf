@@ -26,6 +26,8 @@ public class UserServiceImpl implements IUserService,UserDetailsService {
 	public static final String MESSAGE_ERROR = "Erro interno no servidor, consulte o suporte!!!";
 	
 	public static final String MESSAGE_ERROR_DOADOR_NOT_FOUND = "Usuario nao encontrado, tente novamente.";
+	
+	public static final String MESSAGE_ERROR_REGISTER_USER = "Erro ao salvar, tenten novamente!";
 
 	
 	@Autowired
@@ -95,9 +97,10 @@ public class UserServiceImpl implements IUserService,UserDetailsService {
 	@Override
 	public User saveUser(UserDTO user) throws UserException {
 		try {
-			return userfacade.registerUser(user);
+			User userSalvo = userfacade.registerUser(user);
+			return userSalvo;
 		} catch (UserException c) {
-			throw c;
+			throw new UserException(MESSAGE_ERROR_REGISTER_USER, HttpStatus.BAD_REQUEST);
 		}
 	}
 

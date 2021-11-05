@@ -4,14 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.bnf.aep.DTO.ProductsDTO;
 import com.bnf.aep.entities.Products;
 import com.bnf.aep.exception.ProductsException;
 import com.bnf.aep.repositories.IProductRepository;
@@ -37,11 +33,11 @@ public class ProductServiceImpl implements IProductService {
 	}
 
 	@Override
-	public Boolean deletar(Long id) {
+	public Products deletar(Long id) {
 		try {
 			this.buscaPorId(id);
 			this.produtoRepository.deleteById(id);
-			return Boolean.TRUE;
+			return null;
 
 		} catch (ProductsException m) {
 			throw m;
@@ -51,13 +47,10 @@ public class ProductServiceImpl implements IProductService {
 	}
 
 	@Override
-	public Page<ProductsDTO> listarTodas(Pageable page) {
+	public Products listarTodas() {
 		try {
-			Page<ProductsDTO> produto = this.mapper.map(this.produtoRepository.findAll(page),
-					new TypeToken<List<ProductsDTO>>() {
-					}.getType());
-
-			return produto;
+			List<Products> produto = produtoRepository.findAll();
+		    return (Products) produto;
 
 		} catch (Exception e) {
 			throw new ProductsException(MENSAGEM_ERRO, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -66,11 +59,11 @@ public class ProductServiceImpl implements IProductService {
 	}
 
 	@Override
-	public Boolean inserirDoacao(Products produtos) {
+	public Products inserirDoacao(Products produtos) {
 		try {
 			Products produto = this.mapper.map(produtos, Products.class);
 			produtoRepository.save(produto);
-			return Boolean.TRUE;
+			return produto;
 		} catch (Exception e) {
 			throw new ProductsException(MESSAGE_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -84,24 +77,25 @@ public class ProductServiceImpl implements IProductService {
 	}
 
 	@Override
-	public Boolean atualizar(Products produtos) {
+	public Products atualizar(Products produtos) throws ProductsException{
 		try {
 
 			Optional<Products> daocaoOptional = produtoRepository.findById(produtos.getId());
 
 			if (daocaoOptional.isPresent()) {
 
-				Products doacaoDto = this.mapper.map(daocaoOptional.get(), Products.class);
-
-				produtoRepository.save(doacaoDto);
-
-				throw new ProductsException(MESSAGE_ERROR_DOACAO_NOT_FOUND, HttpStatus.NOT_FOUND);
+				Products doacao = new Products();
+				doacao.setDescricao(produtos.getDescricao());
+				doacao.setValor(produtos.getValor());
+				doacao.setProduto(produtos.getProduto());
+				produtoRepository.save(doacao);
+				return doacao;
 			}
+			
 			throw new ProductsException(MESSAGE_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
+			
 		} catch (ProductsException d) {
-			throw d;
-		} catch (Exception e) {
-			throw new ProductsException(MESSAGE_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
+			throw new ProductsException(MESSAGE_ERROR_DOACAO_NOT_FOUND, HttpStatus.NOT_FOUND);
 		}
 	}
 

@@ -3,8 +3,6 @@ package com.bnf.aep.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bnf.aep.DTO.ProductsDTO;
 import com.bnf.aep.entities.Products;
 import com.bnf.aep.model.Response;
+import com.bnf.aep.repositories.IProductRepository;
 import com.bnf.aep.services.IProductService;
 
 @RestController
@@ -33,26 +31,27 @@ public class ProductController {
 
 	@Autowired
 	private IProductService produtoService;
+	
+	@Autowired
+	private IProductRepository repository;
 
 	@GetMapping
-	public ResponseEntity<Page<ProductsDTO>> listarDoacoes(Pageable pageable) {
-		Page<ProductsDTO> response = produtoService.listarTodas(pageable);
+	public ResponseEntity<List<Products>> listarDoacoes() {
+		List<Products> response = repository.findAll();
 		return ResponseEntity.ok(response);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Response<Boolean>> atualizarDoacao( @RequestBody Products doacaoDTO){
-		Response<Boolean> response = new Response<>();
+	public ResponseEntity<Response<Products>> atualizarDoacao( @RequestBody Products doacaoDTO){
+		Response<Products> response = new Response<>();
 		response.setData(this.produtoService.atualizar(doacaoDTO));
 		response.setStatusCode(HttpStatus.OK.value());
-		response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(ProductController.class).atualizarDoacao(doacaoDTO))
-				.withSelfRel());
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 
 	@PostMapping
-	public ResponseEntity<Response<Boolean>> inserirDoacao(@RequestBody Products doacaoDTO) {
-		Response<Boolean> response = new Response<>();
+	public ResponseEntity<Response<Products>> inserirDoacao(@RequestBody Products doacaoDTO) {
+		Response<Products> response = new Response<>();
 		response.setData(this.produtoService.inserirDoacao(doacaoDTO));
 		response.setStatusCode(HttpStatus.CREATED.value());
 		response.add(WebMvcLinkBuilder
@@ -63,8 +62,8 @@ public class ProductController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Response<Boolean>> excluirDoacao(@PathVariable Long id) {
-		Response<Boolean> response = new Response<>();
+	public ResponseEntity<Response<Products>> excluirDoacao(@PathVariable Long id) {
+		Response<Products> response = new Response<>();
 		response.setData(this.produtoService.deletar(id));
 		response.setStatusCode(HttpStatus.OK.value());
 		response.add(WebMvcLinkBuilder

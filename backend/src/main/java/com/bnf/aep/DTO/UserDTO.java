@@ -16,11 +16,19 @@ public class UserDTO extends RepresentationModel<UserDTO>{
 	
 	private String password;
 	
-	private String tipo;
 
 	
 	public UserDTO() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public UserDTO(String nome, String cpf, String email, String endereco, String password, Long id) {
+		this.id = id;
+		this.nome = nome;
+		this.cpf = cpf;
+		this.email = email;
+		this.endereco = endereco;
+		this.password = password;
 	}
 
 	 
@@ -70,14 +78,6 @@ public class UserDTO extends RepresentationModel<UserDTO>{
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
 	}
 
 
