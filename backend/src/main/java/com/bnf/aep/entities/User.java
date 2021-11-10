@@ -2,6 +2,7 @@
 package com.bnf.aep.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -46,7 +47,7 @@ public class User implements Serializable{
 
 	@OneToMany(mappedBy = "user")
 	@JsonInclude(Include.NON_EMPTY)
-	private List<Products> products;
+	private List<Products> products = new ArrayList<Products>();
 	
 	public User() {
 	}
