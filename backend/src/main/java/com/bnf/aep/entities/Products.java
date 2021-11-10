@@ -2,6 +2,7 @@ package com.bnf.aep.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,20 +31,19 @@ public class Products {
 	@JsonInclude(Include.NON_EMPTY)
 	private String telefone;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
 	
 	public Products() {
 	}
 
-	public Products(Long id, String descricao, String produto, Double valor, String telefone, User user) {
+	public Products(Long id, String descricao, String produto, Double valor, String telefone) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
 		this.produto = produto;
 		this.valor = valor;
 		this.telefone = telefone;
-		this.user = user;
 	}
 
 	public Long getId() {

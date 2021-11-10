@@ -1,12 +1,15 @@
+
 package com.bnf.aep.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -40,6 +43,10 @@ public class User implements Serializable{
 	
 	@JsonInclude(Include.NON_EMPTY)
 	private String password;
+
+	@OneToMany(mappedBy = "user")
+	@JsonInclude(Include.NON_EMPTY)
+	private List<Products> products;
 	
 	public User() {
 	}
@@ -99,6 +106,14 @@ public class User implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public List<Products> getProducts() {
+		return products;
+	}
+	
+	public void setProducts(List<Products> products) {
+		this.products = products;
 	}
 
 
