@@ -5,11 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import org.apache.catalina.User;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-@Entity
+@Entity(name = "tb_doacoes")
 public class Products {
 
 	@Id
@@ -28,6 +31,9 @@ public class Products {
 	
 	@JsonInclude(Include.NON_EMPTY)
 	private String telefone;
+
+	@ManyToOne
+	private User user;
 	
 	
 	public Products() {

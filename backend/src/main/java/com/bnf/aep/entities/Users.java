@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  *
  */
 
-@Entity(name = "Doadores")
+@Entity(name = "tb_dadores_ou_ongs")
 public class Users implements Serializable{
 
 	private static final long serialVersionUID = 260616964148689036L;
