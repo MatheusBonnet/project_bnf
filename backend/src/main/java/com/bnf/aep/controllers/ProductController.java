@@ -36,28 +36,30 @@ public class ProductController {
 	private IProductRepository repository;
 
 	@GetMapping
-	public ResponseEntity<List<Products>> listarDoacoes() {
-		List<Products> response = repository.findAll();
-		return ResponseEntity.ok(response);
+	public ResponseEntity<Response<List<Products>>> listarDoacoes() {
+		Response<List<Products>> response = new Response<>();
+		response.setData(this.repository.findAll());
+		response.setStatusCode(HttpStatus.OK.value());
+		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Response<Products>> atualizarDoacao( @RequestBody Products doacaoDTO){
+	public ResponseEntity<Response<Products>> atualizarDoacao( @RequestBody Products doacao){
 		Response<Products> response = new Response<>();
-		response.setData(this.produtoService.atualizar(doacaoDTO));
+		response.setData(this.produtoService.atualizar(doacao));
 		response.setStatusCode(HttpStatus.OK.value());
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 
 	@PostMapping
-	public ResponseEntity<Response<Products>> inserirDoacao(@RequestBody Products doacaoDTO) {
+	public ResponseEntity<Response<Products>> inserirDoacao(@RequestBody Products doacao) {
 		Response<Products> response = new Response<>();
-		response.setData(this.produtoService.inserirDoacao(doacaoDTO));
+		response.setData(this.produtoService.inserirDoacao(doacao));
 		response.setStatusCode(HttpStatus.CREATED.value());
 		response.add(WebMvcLinkBuilder
-				.linkTo(WebMvcLinkBuilder.methodOn(ProductController.class).inserirDoacao(doacaoDTO)).withSelfRel());
+				.linkTo(WebMvcLinkBuilder.methodOn(ProductController.class).inserirDoacao(doacao)).withSelfRel());
 		response.add(WebMvcLinkBuilder
-				.linkTo(WebMvcLinkBuilder.methodOn(ProductController.class).atualizarDoacao(doacaoDTO)).withRel(UPDATE));
+				.linkTo(WebMvcLinkBuilder.methodOn(ProductController.class).atualizarDoacao(doacao)).withRel(UPDATE));
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 
@@ -77,9 +79,6 @@ public class ProductController {
 		List<Products> materia = this.produtoService.buscaPeloNome(nome);
 		response.setData(materia);
 		response.setStatusCode(HttpStatus.OK.value());
-		response.add(WebMvcLinkBuilder
-				.linkTo(WebMvcLinkBuilder.methodOn(ProductController.class).consultaDoacaoPorNome(nome))
-				.withSelfRel());
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 

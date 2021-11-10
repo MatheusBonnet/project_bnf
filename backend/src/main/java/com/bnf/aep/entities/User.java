@@ -1,15 +1,12 @@
 package com.bnf.aep.entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -44,9 +41,6 @@ public class User implements Serializable{
 	@JsonInclude(Include.NON_EMPTY)
 	private String password;
 	
-	@OneToMany(fetch = FetchType.LAZY)	
-	private List<Products> doacao;
-	
 	public User() {
 	}
 
@@ -79,8 +73,8 @@ public class User implements Serializable{
 		return cpf;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setCpf(String cpfOrCnpj) {
+		this.cpf = cpfOrCnpj;
 	}
 
 	public String getEmail() {
@@ -107,9 +101,6 @@ public class User implements Serializable{
 		this.password = password;
 	}
 
-	public List<Products> getDoacao() {
-		return doacao;
-	}
 
 	@Override
 	public int hashCode() {

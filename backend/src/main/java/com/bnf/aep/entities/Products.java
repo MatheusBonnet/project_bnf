@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -26,15 +27,23 @@ public class Products {
 	@JsonInclude(Include.NON_EMPTY)
 	private Double valor;
 	
+	@JsonInclude(Include.NON_EMPTY)
+	private String telefone;
+	
+	@ManyToOne
+	private User user;
+	
 	public Products() {
 	}
 
-	public Products(Long id, String descricao, String produto, Double valor) {
+	public Products(Long id, String descricao, String produto, Double valor, String telefone, User user) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
 		this.produto = produto;
 		this.valor = valor;
+		this.telefone = telefone;
+		this.user = user;
 	}
 
 	public Long getId() {
@@ -67,6 +76,22 @@ public class Products {
 
 	public void setValor(Double valor) {
 		this.valor = valor;
+	}
+	
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override

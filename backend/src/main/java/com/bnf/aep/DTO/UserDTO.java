@@ -52,8 +52,8 @@ public class UserDTO extends RepresentationModel<UserDTO>{
 		return cpf;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setCpf(String cpfOrCnpj) {
+		this.cpf = cpfOrCnpj;
 	}
 
 	public String getEndereco() {

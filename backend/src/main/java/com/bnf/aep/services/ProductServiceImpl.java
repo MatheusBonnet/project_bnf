@@ -69,38 +69,22 @@ public class ProductServiceImpl implements IProductService {
 		}
 	}
 
-	public List<Products> buscaPeloNome(String nome) {
-		return null;
-//
-//		return this.mapper.map(this.produtoRepository.findByName(nome), new TypeToken<List<Products>>() {
-//		}.getType());
-	}
-
 	@Override
 	public Products atualizar(Products produtos) throws ProductsException{
 		try {
 
 			Optional<Products> daocaoOptional = produtoRepository.findById(produtos.getId());
-
-			if (daocaoOptional.isPresent()) {
-
-				Products doacao = new Products();
-				doacao.setDescricao(produtos.getDescricao());
-				doacao.setValor(produtos.getValor());
-				doacao.setProduto(produtos.getProduto());
-				produtoRepository.save(doacao);
-				return doacao;
+			if(daocaoOptional.isPresent()){
+				return produtoRepository.save(produtos);
 			}
-			
-			throw new ProductsException(MESSAGE_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
-			
+			throw new ProductsException(MESSAGE_ERROR_DOACAO_NOT_FOUND, HttpStatus.NOT_FOUND);
 		} catch (ProductsException d) {
 			throw new ProductsException(MESSAGE_ERROR_DOACAO_NOT_FOUND, HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@Override
-	public Products buscaPorId(Long id) {
+	public Products buscaPorId(Long id) throws ProductsException{
 		try {
 			Optional<Products> produto = this.produtoRepository.findById(id);
 			if (produto.isPresent()) {
@@ -111,6 +95,16 @@ public class ProductServiceImpl implements IProductService {
 			throw m;
 		} catch (Exception e) {
 			throw new ProductsException(MESSAGE_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@Override
+	public List<Products> buscaPeloNome(String nome) {
+		try {
+			List<Products> doacoes = produtoRepository.findByName(nome);
+			return doacoes;
+		} catch (ProductsException e) {
+			throw new ProductsException(MESSAGE_ERROR_DOACAO_NOT_FOUND, HttpStatus.NOT_FOUND);
 		}
 	}
 

@@ -12,9 +12,7 @@ public interface IUserRepository extends JpaRepository<User, Long>{
 
 	User findByEmail(String email);
 
-	User save(User user);
-
-	Optional<User> findByCpf(String cpf);
+	public Optional<User> findByCpf(String cpf);
 
 
 

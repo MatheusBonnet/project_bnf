@@ -76,18 +76,17 @@ public class UserServiceImpl implements IUserService,UserDetailsService {
 	@Override
 	public User atualizarUsuario(UserDTO usuario) throws UserException{
 		try {
-			userfacade.updateDataUser(usuario);
-			return null;
+			return userfacade.updateDataUser(usuario);
 		} catch (UserException c) {
-			throw c;
+			throw new UserException(MESSAGE_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 		
 	@Override
-    public UserDetails loadUserByUsername(String cpf) throws UsernameNotFoundException {
-        Optional<User> usuario = usuarioRepository.findByCpf(cpf);
+    public UserDetails loadUserByUsername(String cpfOrCnpj) throws UsernameNotFoundException {
+        Optional<User> usuario = usuarioRepository.findByCpf(cpfOrCnpj);
         if (usuario.isEmpty()) {
-            throw new UsernameNotFoundException("User " + cpf + "not found");
+            throw new UsernameNotFoundException("User " + cpfOrCnpj + "not found");
         }
 
         return new UserData(usuario);

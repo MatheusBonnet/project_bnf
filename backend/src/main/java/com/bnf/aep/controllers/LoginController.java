@@ -8,10 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bnf.aep.DTO.UserDTO;
 import com.bnf.aep.entities.User;
 import com.bnf.aep.repositories.IUserRepository;
-import com.bnf.aep.services.UserServiceImpl;
 
 /**
  * @author matheus
@@ -21,9 +19,6 @@ import com.bnf.aep.services.UserServiceImpl;
 @RestController
 @RequestMapping("/auth")
 public class LoginController {
-	
-	@Autowired
-	private UserServiceImpl service;
 	
 	@Autowired
 	private IUserRepository repository;
