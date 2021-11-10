@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.bnf.aep.DTO.UserDTO;
-import com.bnf.aep.entities.User;
+import com.bnf.aep.entities.Users;
 import com.bnf.aep.exception.UserException;
 import com.bnf.aep.facade.UserFacade;
 import com.bnf.aep.repositories.IUserRepository;
@@ -59,11 +59,11 @@ public class UserServiceImpl implements IUserService,UserDetailsService {
 
 
 	@Override
-	public User buscaPorId(Long id) throws UserException{
+	public Users buscaPorId(Long id) throws UserException{
 		try {
-			Optional<User> daodorOptional = this.usuarioRepository.findById(id);
+			Optional<Users> daodorOptional = this.usuarioRepository.findById(id);
 			if (daodorOptional.isPresent()) {
-				return this.mapper.map(daodorOptional.get(), User.class);
+				return this.mapper.map(daodorOptional.get(), Users.class);
 			}
 			throw new UserException(MESSAGE_ERROR_DOADOR_NOT_FOUND, HttpStatus.NOT_FOUND);
 		} catch (UserException m) {
@@ -74,7 +74,7 @@ public class UserServiceImpl implements IUserService,UserDetailsService {
 	}
 
 	@Override
-	public User atualizarUsuario(UserDTO usuario) throws UserException{
+	public Users atualizarUsuario(UserDTO usuario) throws UserException{
 		try {
 			return userfacade.updateDataUser(usuario);
 		} catch (UserException c) {
@@ -84,7 +84,7 @@ public class UserServiceImpl implements IUserService,UserDetailsService {
 		
 	@Override
     public UserDetails loadUserByUsername(String cpfOrCnpj) throws UsernameNotFoundException {
-        Optional<User> usuario = usuarioRepository.findByCpf(cpfOrCnpj);
+        Optional<Users> usuario = usuarioRepository.findByCpf(cpfOrCnpj);
         if (usuario.isEmpty()) {
             throw new UsernameNotFoundException("User " + cpfOrCnpj + "not found");
         }
@@ -94,9 +94,9 @@ public class UserServiceImpl implements IUserService,UserDetailsService {
 
 
 	@Override
-	public User saveUser(UserDTO user) throws UserException {
+	public Users saveUser(UserDTO user) throws UserException {
 		try {
-			User userSalvo = userfacade.registerUser(user);
+			Users userSalvo = userfacade.registerUser(user);
 			return userSalvo;
 		} catch (UserException c) {
 			throw new UserException(MESSAGE_ERROR_REGISTER_USER, HttpStatus.BAD_REQUEST);

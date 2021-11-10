@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.bnf.aep.entities.User;
+import com.bnf.aep.entities.Users;
 import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * @author matheus
@@ -39,8 +39,8 @@ public class JWTAutenticarFilter extends UsernamePasswordAuthenticationFilter {
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
         try {
-            User usuario = new ObjectMapper()
-                    .readValue(request.getInputStream(), User.class);
+        	Users usuario = new ObjectMapper()
+                    .readValue(request.getInputStream(), Users.class);
 
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     usuario.getCpf(),

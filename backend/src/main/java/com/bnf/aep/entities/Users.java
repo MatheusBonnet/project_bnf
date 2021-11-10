@@ -2,15 +2,12 @@
 package com.bnf.aep.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -20,8 +17,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  *
  */
 
-@Entity
-public class User implements Serializable{
+@Entity(name = "Doadores")
+public class Users implements Serializable{
 
 	private static final long serialVersionUID = 260616964148689036L;
 
@@ -45,14 +42,10 @@ public class User implements Serializable{
 	@JsonInclude(Include.NON_EMPTY)
 	private String password;
 
-	@OneToMany(mappedBy = "user")
-	@JsonInclude(Include.NON_EMPTY)
-	private List<Products> products = new ArrayList<Products>();
-	
-	public User() {
+	public Users() {
 	}
 
-	public User(String nome, String cpf, String email, String endereco, String password, Long id) {
+	public Users(String nome, String cpf, String email, String endereco, String password, Long id) {
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
@@ -108,14 +101,6 @@ public class User implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public List<Products> getProducts() {
-		return products;
-	}
-	
-	public void setProducts(List<Products> products) {
-		this.products = products;
-	}
 
 
 	@Override
@@ -134,7 +119,7 @@ public class User implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Users other = (Users) obj;
 		if (cpf == null) {
 			if (other.cpf != null)
 				return false;

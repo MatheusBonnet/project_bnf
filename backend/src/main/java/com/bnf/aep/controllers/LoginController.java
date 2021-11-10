@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bnf.aep.entities.User;
+import com.bnf.aep.entities.Users;
 import com.bnf.aep.repositories.IUserRepository;
 
 /**
@@ -28,7 +28,7 @@ public class LoginController {
 
     
     @PostMapping("/singup")
-    public ResponseEntity<User> salvar(@RequestBody User usuario) {
+    public ResponseEntity<Users> salvar(@RequestBody Users usuario) {
         usuario.setPassword(encoder.encode(usuario.getPassword()));
         return ResponseEntity.ok(repository.save(usuario));
     }

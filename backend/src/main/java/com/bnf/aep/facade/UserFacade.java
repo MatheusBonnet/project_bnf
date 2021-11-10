@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bnf.aep.DTO.UserDTO;
-import com.bnf.aep.entities.User;
+import com.bnf.aep.entities.Users;
 import com.bnf.aep.facade.populators.Populator;
 import com.bnf.aep.repositories.IUserRepository;
 import com.bnf.aep.services.IUserService;
@@ -13,7 +13,7 @@ import com.bnf.aep.services.IUserService;
 public class UserFacade {
 
 	@Autowired
-	private Populator<UserDTO, User> userReversePopulator;
+	private Populator<UserDTO, Users> userReversePopulator;
 	
 	@Autowired
 	private IUserService userService;
@@ -22,7 +22,7 @@ public class UserFacade {
 	@Autowired
 	private IUserRepository repository;
 
-	public Populator<UserDTO, User> getUserReversePopulator() {
+	public Populator<UserDTO, Users> getUserReversePopulator() {
 		return userReversePopulator;
 	}
 
@@ -34,7 +34,7 @@ public class UserFacade {
 		this.userService = userService;
 	}
 
-	public void setUserReversePopulator(Populator<UserDTO, User> userReversePopulator) {
+	public void setUserReversePopulator(Populator<UserDTO, Users> userReversePopulator) {
 		this.userReversePopulator = userReversePopulator;
 	}
 	
@@ -46,15 +46,15 @@ public class UserFacade {
 		this.repository = repository;
 	}
 	
-	public User registerUser(UserDTO userDTO) {
-		User user = new User();
+	public Users registerUser(UserDTO userDTO) {
+		Users user = new Users();
 		getUserReversePopulator().populate(userDTO, user);
 		getRepository().save(user);
 		return user;
 	}
 	
-	public User updateDataUser(UserDTO userDTO) {
-		User user = new User();
+	public Users updateDataUser(UserDTO userDTO) {
+		Users user = new Users();
 		getUserReversePopulator().populate(userDTO, user);
 		getRepository().save(user);
 		return user;

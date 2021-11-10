@@ -2,11 +2,9 @@ package com.bnf.aep.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -31,8 +29,6 @@ public class Products {
 	@JsonInclude(Include.NON_EMPTY)
 	private String telefone;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	private User user;
 	
 	public Products() {
 	}
@@ -84,14 +80,6 @@ public class Products {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	@Override

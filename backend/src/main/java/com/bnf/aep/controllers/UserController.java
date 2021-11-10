@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bnf.aep.DTO.UserDTO;
-import com.bnf.aep.entities.User;
+import com.bnf.aep.entities.Users;
 import com.bnf.aep.model.Response;
 import com.bnf.aep.repositories.IUserRepository;
 import com.bnf.aep.services.IUserService;
@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @GetMapping("/listarTodos")
-    public ResponseEntity<List<User>> listarTodos() {
+    public ResponseEntity<List<Users>> listarTodos() {
         return ResponseEntity.ok(repository.findAll());
     }
 
@@ -59,12 +59,12 @@ public class UserController {
     public ResponseEntity<Boolean> validarSenha(@RequestParam String cpf,
                                                 @RequestParam String password) {
 
-        Optional<User> optUsuario = repository.findByCpf(cpf);
+        Optional<Users> optUsuario = repository.findByCpf(cpf);
         if (optUsuario.isEmpty()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
         }
 
-        User usuario = optUsuario.get();
+        Users usuario = optUsuario.get();
         boolean valid = encoder.matches(password, usuario.getPassword());
 
         HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
@@ -72,8 +72,8 @@ public class UserController {
     }
     
     @PutMapping("/{id}")
-	public ResponseEntity<Response<User>> atualizarDoador( @RequestBody UserDTO user){
-		Response<User> response = new Response<>();
+	public ResponseEntity<Response<Users>> atualizarDoador( @RequestBody UserDTO user){
+		Response<Users> response = new Response<>();
 		response.setData(this.getUserService().atualizarUsuario(user));
 		response.setStatusCode(HttpStatus.OK.value());
 		return ResponseEntity.status(HttpStatus.OK).body(response);

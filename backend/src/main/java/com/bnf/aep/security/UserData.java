@@ -8,16 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.bnf.aep.entities.User;
+import com.bnf.aep.entities.Users;
 
 public class UserData implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
-	private final Optional<User> usuario;
+	private final Optional<Users> usuario;
 
-    public UserData(Optional<User> usuario2) {
+    public UserData(Optional<Users> usuario2) {
         this.usuario = usuario2;
     }
 
@@ -28,12 +28,12 @@ public class UserData implements UserDetails {
 
     @Override
     public String getPassword() {
-        return usuario.orElse(new User()).getPassword();
+        return usuario.orElse(new Users()).getPassword();
     }
 
     @Override
     public String getUsername() {
-    	return usuario.orElse(new User()).getCpf();
+    	return usuario.orElse(new Users()).getCpf();
     }
 
     @Override
