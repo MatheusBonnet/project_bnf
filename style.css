@@ -88,7 +88,7 @@ main p{
 #entrar-btn{
     margin-top: 20px;
 }
-#entrar-btn, #criar-btn,#salvar-btn{
+#entrar-btn, #criar-btn,#salvar-btn, #input-contato{
     background: var(--header-color);
     border: none;
     padding: 5px;
@@ -101,7 +101,7 @@ main p{
     width: 80%;
     padding: 10px;
 }
-#entrar-btn:hover, #criar-btn:hover, #finalizar-cadastro:hover, #salvar-btn:hover{
+#entrar-btn:hover, #criar-btn:hover, #finalizar-cadastro:hover, #salvar-btn:hover, #input-contato:hover{
     background: var(--bg-color);
     color: var(--header-color);
     transition: .5s;
@@ -239,3 +239,11 @@ span{
     margin: auto;
     width: 50vw;
 }
+/* #doacao{
+    background-color: #d1d1d1;
+    max-width: 50%;
+    margin: auto;
+}
+#doacao>p{
+    color: #3b3b3b;
+} */
