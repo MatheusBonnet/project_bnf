@@ -7,12 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.apache.catalina.User;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-@Entity(name = "tb_doacoes")
+@Entity
 public class Products {
 
 	@Id
@@ -33,7 +31,7 @@ public class Products {
 	private String telefone;
 
 	@ManyToOne
-	private User user;
+	private Users users;
 	
 	
 	public Products() {
@@ -86,6 +84,14 @@ public class Products {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+	
+	public Users getUsers() {
+		return users;
+	}
+
+	public void setUsers(Users users) {
+		this.users = users;
 	}
 
 	@Override

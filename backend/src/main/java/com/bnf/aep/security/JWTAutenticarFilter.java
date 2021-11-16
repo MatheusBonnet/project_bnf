@@ -68,6 +68,5 @@ public class JWTAutenticarFilter extends UsernamePasswordAuthenticationFilter {
                 .sign(Algorithm.HMAC512(TOKEN_SENHA));
 
         response.getWriter().write(token);
-        response.getWriter().flush();
     }
 }

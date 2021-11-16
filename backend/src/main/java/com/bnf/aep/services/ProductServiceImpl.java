@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -47,10 +49,10 @@ public class ProductServiceImpl implements IProductService {
 	}
 
 	@Override
-	public Products listarTodas() {
+	public Page<Products> listarTodas(Pageable pageable) {
 		try {
-			List<Products> produto = produtoRepository.findAll();
-		    return (Products) produto;
+			Page<Products> pages = produtoRepository.findAll(pageable);
+			return pages;
 
 		} catch (Exception e) {
 			throw new ProductsException(MENSAGEM_ERRO, HttpStatus.INTERNAL_SERVER_ERROR);

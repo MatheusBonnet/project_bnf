@@ -3,6 +3,8 @@ package com.bnf.aep.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bnf.aep.entities.Products;
 import com.bnf.aep.model.Response;
-import com.bnf.aep.repositories.IProductRepository;
 import com.bnf.aep.services.IProductService;
 
 @RestController
-@RequestMapping("/produtos")
+@RequestMapping("/doacoes")
 public class ProductController {
 
 	public static final String UPDATE = "Atualizado com sucesso.";
@@ -32,15 +33,12 @@ public class ProductController {
 	@Autowired
 	private IProductService produtoService;
 	
-	@Autowired
-	private IProductRepository repository;
 
 	@GetMapping
-	public ResponseEntity<Response<List<Products>>> listarDoacoes() {
-		Response<List<Products>> response = new Response<>();
-		response.setData(this.repository.findAll());
-		response.setStatusCode(HttpStatus.OK.value());
-		return ResponseEntity.status(HttpStatus.OK).body(response);
+	public ResponseEntity<Page<Products>> listarDoacoes(Pageable pageable) {
+		Page<Products> page = produtoService.listarTodas(pageable);
+		return ResponseEntity.ok(page);
+		
 	}
 
 	@PutMapping("/{id}")
