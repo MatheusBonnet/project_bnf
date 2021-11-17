@@ -4,7 +4,7 @@ import { useHistory} from 'react-router-dom';
 import '../../global.css';
 import logo from '../../assets/logo.png';
 import api from '../../services/api';
-
+import { BsPersonCircle } from "react-icons/bs";
 
 export default function Login(){
     const [cpf, setCpf] = useState('');
@@ -42,6 +42,8 @@ export default function Login(){
                     <li id="view-donate"><Link to = {"/"}> VER DOAÇÕES </Link> </li>
                     <li id="donate-now"><Link to = {"/"}> DOAR JÁ </Link> </li>
                 </ul>
+
+                <BsPersonCircle id = " perfil "/>
 
                 
             </header>
@@ -82,7 +84,6 @@ export default function Login(){
         </section>
 
     </main>
-        <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js" ></script>
      </body>
     )
 }

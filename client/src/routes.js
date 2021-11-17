@@ -5,6 +5,7 @@ import CadastrarUser from './pages/CadastrarUser';
 import Doacoes from './pages/Doacoes';
 import Login from './pages/Login';
 import PorqueDoar from './pages/PorqueDoar'
+import UpdateUser from './pages/UpadateUser';
 
 
 export default function Routes() {
@@ -16,6 +17,7 @@ export default function Routes() {
                 <Route path="/auth/singup" exact component = {CadastrarUser}/>
                 <Route path="/doacoes" exact component = {Doacoes}/>
                 <Route path="/cadastrarDoacao" exact component = {CadastrarDoacao}/>
+                <Route path="/atualizarDados" exact component = {UpdateUser}/>
             </Switch>
         </BrowserRouter>
     );

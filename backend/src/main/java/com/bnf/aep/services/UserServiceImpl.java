@@ -74,7 +74,7 @@ public class UserServiceImpl implements IUserService,UserDetailsService {
 	}
 
 	@Override
-	public Users atualizarUsuario(UserDTO usuario) throws UserException{
+	public Users atualizarUsuario(Users usuario) throws UserException{
 		try {
 			return userfacade.updateDataUser(usuario);
 		} catch (UserException c) {

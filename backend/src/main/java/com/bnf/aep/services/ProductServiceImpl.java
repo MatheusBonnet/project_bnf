@@ -63,9 +63,8 @@ public class ProductServiceImpl implements IProductService {
 	@Override
 	public Products inserirDoacao(Products produtos) {
 		try {
-			Products produto = this.mapper.map(produtos, Products.class);
-			produtoRepository.save(produto);
-			return produto;
+			produtoRepository.save(produtos);
+			return produtos;
 		} catch (Exception e) {
 			throw new ProductsException(MESSAGE_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
 		}

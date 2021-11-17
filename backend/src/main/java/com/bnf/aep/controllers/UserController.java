@@ -14,14 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bnf.aep.DTO.UserDTO;
 import com.bnf.aep.entities.Users;
 import com.bnf.aep.model.Response;
 import com.bnf.aep.repositories.IUserRepository;
 import com.bnf.aep.services.IUserService;
 
 @RestController
-@RequestMapping("/doadores")
+@RequestMapping("/users")
 public class UserController {
 
 	public static final String UPDATE = "Atualizado com sucesso.";
@@ -49,7 +48,7 @@ public class UserController {
         this.encoder = encoder;
     }
 
-    @GetMapping("/listarTodos")
+    @GetMapping("/findAll")
     public ResponseEntity<List<Users>> listarTodos() {
         return ResponseEntity.ok(repository.findAll());
     }
@@ -72,8 +71,9 @@ public class UserController {
     }
     
     @PutMapping("/{id}")
-	public ResponseEntity<Response<Users>> atualizarDoador( @RequestBody UserDTO user){
+	public ResponseEntity<Response<Users>> atualizarDoador( @RequestBody Users user){
 		Response<Users> response = new Response<>();
+		user.setPassword(encoder.encode(user.getPassword()));
 		response.setData(this.getUserService().atualizarUsuario(user));
 		response.setStatusCode(HttpStatus.OK.value());
 		return ResponseEntity.status(HttpStatus.OK).body(response);

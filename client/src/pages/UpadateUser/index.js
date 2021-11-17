@@ -6,7 +6,7 @@ import api from '../../services/api';
 import { Link } from 'react-router-dom';
 import { BsPersonCircle } from "react-icons/bs";
 
-export default function CadastrarUser(){
+export default function UpdateUser(){
 
     const [nome, setNome] = useState('');
     const [cpf, setCpf] = useState('');
@@ -17,7 +17,7 @@ export default function CadastrarUser(){
 
     const history = useHistory();
 
-    async function cadastrarUser(e){
+    async function updateUSer(e){
         e.preventDefault();
 
         const data = {
@@ -29,7 +29,7 @@ export default function CadastrarUser(){
         };
 
         try {
-            const response = await api.post('auth/singup', data);
+            await api.put('users', data);
 
             history.push('/')
         } catch (err) {
@@ -44,11 +44,11 @@ export default function CadastrarUser(){
 
                 <ul>
                     <li id="pq-doar"><Link to = {"/porqueDoar"}> PORQUE DOAR? </Link> </li>
-                    <li id="view-donate"><Link to = {"/"}> VER DOAÇÕES </Link> </li>
-                    <li id="donate-now"><Link to = {"/"}> DOAR JÁ </Link> </li>
+                    <li id="view-donate"><Link to = {"/doacoes"}> VER DOAÇÕES </Link> </li>
+                    <li id="donate-now"><Link to = {"/cadastrarDoacao"}> DOAR JÁ </Link> </li>
                 </ul>
 
-                <BsPersonCircle id = " perfil "/>
+                <Link to = {"/atualizarDados"}> <BsPersonCircle id = "logo"/></Link>
 
             </header>
 
@@ -58,33 +58,43 @@ export default function CadastrarUser(){
 
     <main id="main-cadastro">
 
-            <div id="centro-cadastro">
-                <form onSubmit = {cadastrarUser}>
-                    <input type="text" name="nome" id="nome" class="input-cadastro" placeholder="  Nome"
+        <section>
+            <div id="dados-pessoais">
+
+                <h1>SEUS DADOS</h1>
+                <h2>Dados Pessoais</h2>
+
+                <form onSubmit = {updateUSer}>
+                    <input type="text" name="nome" id="nome" class="input-atualizar" placeholder="  Nome"
                         value = {nome}
                         onChange={e => setNome(e.target.value)}
                     />
-                    <input type="email" name="email" id="email"class="input-cadastro" placeholder="  E-mail"
+                    <input type="email" name="email" id="email"class="input-atualizar" placeholder="  E-mail"
                         value = {email}
                         onChange = {e => setEmail(e.target.value)}
                     />
-                    <input type="text" name="cpf-cnpj" id="cpf-cnpj"class="input-cadastro" placeholder="  CPF/CNPJ"
+                    <input type="text" name="cpf-cnpj" id="cpf-cnpj"class="input-atualizar" placeholder="  CPF/CNPJ"
                         value = {cpf}
                         onChange = {e => setCpf(e.target.value)}
                     />
-                    <input type="text" name="endereco" id="endereco"class="input-cadastro" placeholder="  Endereço"
+                    <input type="text" name="endereco" id="endereco"class="input-atualizar" placeholder="  Endereço"
                         value = {endereco}
                         onChange = {e => setEndereco(e.target.value)}
                     />
-                    <input type="password" name="senha" id="senha-cadastro"class="input-cadastro" placeholder="  Senha"
+                    <input type="password" name="senha" id="senha-nova"class="input-atualizar" placeholder="  Senha"
                         value = {password}
                         onChange = {e => setPassword(e.target.value)}
                     />
-                    <input id="finalizar-cadastro" type="submit" value="FINALIZAR CADASTRO"/>
+                    <input id="salvar-btn" type="submit" value="SALVAR ALTERAÇÕES"/>
                 </form>
+
             </div>
 
+        </section>
+
     </main>
+
+
 
        </body>
     )

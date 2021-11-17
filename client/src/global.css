@@ -36,14 +36,14 @@ li{
     display: inline-flex;
     margin-right: 5vw;
 }
-ion-icon#perfil{
+#perfil{
     font-size: clamp(1.7em, 3em, 4em);
     margin-right: 20px;
     color: var(--bg-color);
     margin-top: 5px;
     border-radius: 50%;
 }
-ion-icon#perfil:hover{
+#perfil:hover{
     color: var(--header-color);
     background-color: var(--bg-color);
     transition: .3s;
@@ -88,7 +88,7 @@ main p{
 #entrar-btn{
     margin-top: 20px;
 }
-#entrar-btn, #criar-btn,#salvar-btn{
+#entrar-btn, #criar-btn,#salvar-btn, #input-contato{
     background: var(--header-color);
     border: none;
     padding: 5px;
@@ -101,7 +101,7 @@ main p{
     width: 80%;
     padding: 10px;
 }
-#entrar-btn:hover, #criar-btn:hover, #finalizar-cadastro:hover, #salvar-btn:hover{
+#entrar-btn:hover, #criar-btn:hover, #finalizar-cadastro:hover, #salvar-btn:hover, #input-contato:hover{
     background: var(--bg-color);
     color: var(--header-color);
     transition: .5s;
@@ -199,6 +199,7 @@ span{
     padding: 20px;
     border-radius: 5px;
     border: 1px solid #d8d6d6;
+    margin-top: 60px;
 }
 .input-cadastro{
     margin-bottom: 15px;
@@ -218,6 +219,7 @@ span{
     max-width: 400px;
     width: 100%;
     padding: 10px;
+    
 }
 #descricao-produto{
     margin-bottom: 15px;

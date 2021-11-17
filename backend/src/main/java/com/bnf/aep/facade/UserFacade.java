@@ -53,9 +53,7 @@ public class UserFacade {
 		return user;
 	}
 	
-	public Users updateDataUser(UserDTO userDTO) {
-		Users user = new Users();
-		getUserReversePopulator().populate(userDTO, user);
+	public Users updateDataUser(Users user) {
 		getRepository().save(user);
 		return user;
 	}

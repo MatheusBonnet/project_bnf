@@ -11,7 +11,7 @@ public interface IUserService {
 	
 	public Users buscaPorId(final Long cpf);
 
-	public Users atualizarUsuario(UserDTO user) throws UserException;
+	public Users atualizarUsuario(Users user) throws UserException;
 	
 	public Users saveUser(UserDTO user) throws UserException;
 

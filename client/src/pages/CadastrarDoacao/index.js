@@ -4,6 +4,7 @@ import '../../global.css';
 import logo from '../../assets/logo.png';
 import api from '../../services/api';
 import { Link } from 'react-router-dom';
+import { BsPersonCircle } from "react-icons/bs";
 
 export default function CadastrarDoacao(){
 
@@ -42,7 +43,7 @@ export default function CadastrarDoacao(){
     return (
         <body>
             <header>
-                <Link to = {"/"}><img src = {logo} id = "logo"/></Link>
+                <img src = {logo} id = "logo"/>
 
                 <ul>
                     <li id="pq-doar"><Link to = {"/porqueDoar"}> PORQUE DOAR? </Link> </li>
@@ -50,7 +51,7 @@ export default function CadastrarDoacao(){
                     <li id="donate-now"><Link to = {"/cadastrarDoacao"}> DOAR JÁ </Link> </li>
                 </ul>
 
-                <a href="#"><ion-icon id="perfil" name="contact"></ion-icon></a>
+                <Link to = {"/atualizarDados"}> <BsPersonCircle id = "perfil"/></Link>
 
             </header>
 
@@ -87,7 +88,6 @@ export default function CadastrarDoacao(){
 
 </main>
 
-    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js" ></script>
 
     </body>
     )

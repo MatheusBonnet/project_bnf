@@ -4,6 +4,7 @@ import { useHistory} from 'react-router-dom';
 import '../../global.css';
 import logo from '../../assets/logo.png';
 import api from '../../services/api';
+import { BsPersonCircle } from "react-icons/bs";
 
 
 export default function Doacoes(){
@@ -18,7 +19,7 @@ export default function Doacoes(){
 
     async function editarDoacao(id) {
         try {
-            await api.delete(`doacoes/${id}`, {
+            await api.put(`doacoes/${id}`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 }
@@ -49,19 +50,21 @@ export default function Doacoes(){
         }).then(response => {
             setDoacoes(response.data.content)
         })
-    });
+    }, []);
     
     return (
 
         <body>
             <header>
-                <Link to = {"/"}><img src = {logo} id = "logo"/></Link>
+                <img src = {logo} id = "logo"/>
 
                 <ul>
                     <li id="pq-doar"><Link to = {"/porqueDoar"}> PORQUE DOAR? </Link> </li>
                     <li id="view-donate"><Link to = {"/doacoes"}> VER DOAÇÕES </Link> </li>
                     <li id="donate-now"><Link to = {"/cadastrarDoacao"}> DOAR JÁ </Link> </li>
                 </ul>
+
+                <Link to = {"/atualizarDados"}> <BsPersonCircle id = "perfil"/></Link>
 
             </header>
         
@@ -86,8 +89,6 @@ export default function Doacoes(){
                     </li>
                 )}
             </ul>
-
-            <input id="btn-criar" type="button" placeholder = "Proxima pagina" />
 
             
         </body>
