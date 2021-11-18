@@ -36,14 +36,14 @@ li{
     display: inline-flex;
     margin-right: 5vw;
 }
-#perfil{
+#perfil, #btn-sair{
     font-size: clamp(1.7em, 3em, 4em);
     margin-right: 20px;
     color: var(--bg-color);
     margin-top: 5px;
     border-radius: 50%;
 }
-#perfil:hover{
+#perfil:hover, #btn-sair:hover{
     color: var(--header-color);
     background-color: var(--bg-color);
     transition: .3s;
@@ -61,7 +61,7 @@ a{
 }
 h1{
     text-align: center;
-    margin-top: 100px;
+    margin-top: 10px;
     margin-bottom: 15px;
     font-family: 'Montserrat', sans-serif;
 }
@@ -78,12 +78,12 @@ main p{
     text-align: center;
 }
 #login, #dados-pessoais, #dados-acesso{
-    width: 50%;
+    width: 100%;
     padding: 10px;
-    border-right: solid 1px var(--border-color);
     align-items: center;
     text-align: center;
-    margin-top: 100px;
+    margin-top: 10px;
+    display: inline-table;
 }
 #entrar-btn{
     margin-top: 20px;
@@ -237,12 +237,12 @@ span{
 .input-atualizar{
     display: inline;
     flex-direction: column;
-    width: 40vw;
+    width: 100%;
     margin-bottom: 10px;
     height: 3vw;
     border: 1px solid #d1d1d1;
 }
 #salvar-btn{
-    margin: auto;
-    width: 50vw;
+    width: 100%;
+    margin-bottom: 20px;
 }

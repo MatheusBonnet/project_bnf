@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,12 +71,17 @@ public class UserController {
         return ResponseEntity.status(status).body(valid);
     }
     
-    @PutMapping("/{id}")
-	public ResponseEntity<Response<Users>> atualizarDoador( @RequestBody Users user){
+    @PutMapping("/updateUser")
+	public ResponseEntity<Response<Users>> atualizarDoador(@RequestBody Users user){
 		Response<Users> response = new Response<>();
 		user.setPassword(encoder.encode(user.getPassword()));
 		response.setData(this.getUserService().atualizarUsuario(user));
 		response.setStatusCode(HttpStatus.OK.value());
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Users>> findById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(repository.findById(id));
+    }
 }

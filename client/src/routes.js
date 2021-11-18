@@ -14,10 +14,10 @@ export default function Routes() {
             <Switch>
                 <Route path="/" exact component = {Login}/>
                 <Route path="/porqueDoar" exact component  = {PorqueDoar}/>
-                <Route path="/auth/singup" exact component = {CadastrarUser}/>
+                <Route path="/auth/singup"  exact component = {CadastrarUser}/>
                 <Route path="/doacoes" exact component = {Doacoes}/>
                 <Route path="/cadastrarDoacao" exact component = {CadastrarDoacao}/>
-                <Route path="/atualizarDados" exact component = {UpdateUser}/>
+                <Route path="/users" exact component = {UpdateUser}/>
             </Switch>
         </BrowserRouter>
     );

@@ -5,6 +5,7 @@ import logo from '../../assets/logo.png';
 import api from '../../services/api';
 import { Link } from 'react-router-dom';
 import { BsPersonCircle } from "react-icons/bs";
+import { BiLogOut } from 'react-icons/bi';
 
 export default function CadastrarDoacao(){
 
@@ -40,6 +41,11 @@ export default function CadastrarDoacao(){
         }
     }
 
+    async function  logout(){
+        localStorage.clear();
+        history.push('/');
+    };
+
     return (
         <body>
             <header>
@@ -51,7 +57,9 @@ export default function CadastrarDoacao(){
                     <li id="donate-now"><Link to = {"/cadastrarDoacao"}> DOAR JÁ </Link> </li>
                 </ul>
 
-                <Link to = {"/atualizarDados"}> <BsPersonCircle id = "perfil"/></Link>
+                <BiLogOut id = "btn-sair" onClick = {logout}/>
+
+                <Link to = {"/users/:idUser"}> <BsPersonCircle id = "perfil"/></Link>
 
             </header>
 

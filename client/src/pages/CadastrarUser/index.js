@@ -4,7 +4,6 @@ import '../../global.css';
 import logo from '../../assets/logo.png';
 import api from '../../services/api';
 import { Link } from 'react-router-dom';
-import { BsPersonCircle } from "react-icons/bs";
 
 export default function CadastrarUser(){
 
@@ -13,9 +12,15 @@ export default function CadastrarUser(){
     const [email, setEmail] = useState('');
     const [endereco, setEndereco] = useState('');
     const [password, setPassword] = useState('');
-    
+
+    localStorage.setItem("nome", nome);
+    localStorage.setItem("cpf", cpf);
 
     const history = useHistory();
+
+    async function clear() {
+        localStorage.clear();
+    }
 
     async function cadastrarUser(e){
         e.preventDefault();
@@ -40,15 +45,13 @@ export default function CadastrarUser(){
     return (
         <body>
             <header>
-                <Link to = {"/"}><img src = {logo} id = "logo"/></Link>
+                <Link to = {"/"} onClick = {clear}><img src = {logo} id = "logo"/></Link>
 
                 <ul>
                     <li id="pq-doar"><Link to = {"/porqueDoar"}> PORQUE DOAR? </Link> </li>
                     <li id="view-donate"><Link to = {"/"}> VER DOAÇÕES </Link> </li>
                     <li id="donate-now"><Link to = {"/"}> DOAR JÁ </Link> </li>
                 </ul>
-
-                <BsPersonCircle id = " perfil "/>
 
             </header>
 

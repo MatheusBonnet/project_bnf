@@ -73,7 +73,7 @@ public class JWTConfiguracao extends WebSecurityConfigurerAdapter {
 		registry.addMapping("/**")
 		.allowedOrigins("http://localhost:3000")
 		.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT");
-	}
+    }
 
 }
 

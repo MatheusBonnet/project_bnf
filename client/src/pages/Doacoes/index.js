@@ -5,13 +5,12 @@ import '../../global.css';
 import logo from '../../assets/logo.png';
 import api from '../../services/api';
 import { BsPersonCircle } from "react-icons/bs";
+import { BiLogOut } from 'react-icons/bi';
 
 
 export default function Doacoes(){
 
     const [doacoes, setDoacoes] = useState([]);
-    
-    const nome = localStorage.getItem('nome');
     const accessToken = localStorage.getItem('accessToken');
 
     const history = useHistory();
@@ -42,6 +41,11 @@ export default function Doacoes(){
         }
     }
 
+    async function  logout(){
+        localStorage.clear();
+        history.push('/');
+    };
+
     useEffect(() => {
         api.get('doacoes' , {
         headers: {
@@ -64,7 +68,9 @@ export default function Doacoes(){
                     <li id="donate-now"><Link to = {"/cadastrarDoacao"}> DOAR JÁ </Link> </li>
                 </ul>
 
-                <Link to = {"/atualizarDados"}> <BsPersonCircle id = "perfil"/></Link>
+                <BiLogOut id = "btn-sair" onClick = {logout}/>
+
+                <Link to = {"users"}> <BsPersonCircle id = "perfil"/></Link>
 
             </header>
         

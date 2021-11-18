@@ -23,7 +23,6 @@ export default function Login(){
         try {
             const response = await api.post('login', data);
 
-            localStorage.setItem('cpf', cpf);
             localStorage.setItem('accessToken', response.data);
 
             history.push('/doacoes')
@@ -42,8 +41,6 @@ export default function Login(){
                     <li id="view-donate"><Link to = {"/"}> VER DOAÇÕES </Link> </li>
                     <li id="donate-now"><Link to = {"/"}> DOAR JÁ </Link> </li>
                 </ul>
-
-                <BsPersonCircle id = " perfil "/>
 
                 
             </header>
