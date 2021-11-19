@@ -36,8 +36,8 @@ export default function Login(){
             <header>
                 <Link to = {"/"}><img src = {logo} id = "logo"/></Link>
 
-                <ul>
-                    <li id="pq-doar"><Link to = {"/porqueDoar"}> PORQUE DOAR? </Link> </li>
+                <ul class="cabecalho">
+                    <li id="pq-doar"><Link to = {"/"}> PORQUE DOAR? </Link> </li>
                     <li id="view-donate"><Link to = {"/"}> VER DOAÇÕES </Link> </li>
                     <li id="donate-now"><Link to = {"/"}> DOAR JÁ </Link> </li>
                 </ul>
@@ -53,7 +53,7 @@ export default function Login(){
     <main>  
         <section>
         <div id = "login">
-            <p>Já tenho uma conta</p>
+            <p class="p_login">Já tenho uma conta</p>
 
             <form onSubmit = {login}>
                <input id="user" type="text" placeholder="CPF/CNPJ"
@@ -73,7 +73,7 @@ export default function Login(){
         </div>
 
         <div id ="cadastro">
-            <p>Cadastre-se aqui</p>
+            <p class="p_cad">Criar uma conta</p>
             <button id="criar-btn" value="CRIE UMA CONTA"><Link to = {"auth/singup"}> CADASTRE-SE AQUI</Link></button>
         </div>
         

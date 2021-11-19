@@ -15,8 +15,8 @@ export default function PorqueDoar(){
 
                 <ul>
                     <li id="pq-doar"><Link to = {"/porqueDoar"}> PORQUE DOAR? </Link> </li>
-                    <li id="view-donate"><Link to = {"/"}> VER DOAÇÕES </Link> </li>
-                    <li id="donate-now"><Link to = {"/"}> DOAR JÁ </Link> </li>
+                    <li id="view-donate"><Link to = {"/doacoes"}> VER DOAÇÕES </Link> </li>
+                    <li id="donate-now"><Link to = {"/cadastrarDoacao"}> DOAR JÁ </Link> </li>
                 </ul>
 
             </header>

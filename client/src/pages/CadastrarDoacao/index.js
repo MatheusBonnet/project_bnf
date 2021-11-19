@@ -59,7 +59,7 @@ export default function CadastrarDoacao(){
 
                 <BiLogOut id = "btn-sair" onClick = {logout}/>
 
-                <Link to = {"/users/:idUser"}> <BsPersonCircle id = "perfil"/></Link>
+                <Link to = {"/atualizarDados"}> <BsPersonCircle id = "perfil"/></Link>
 
             </header>
 

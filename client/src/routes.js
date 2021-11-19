@@ -17,7 +17,7 @@ export default function Routes() {
                 <Route path="/auth/singup"  exact component = {CadastrarUser}/>
                 <Route path="/doacoes" exact component = {Doacoes}/>
                 <Route path="/cadastrarDoacao" exact component = {CadastrarDoacao}/>
-                <Route path="/users" exact component = {UpdateUser}/>
+                <Route path="/atualizarDados" exact component = {UpdateUser}/>
             </Switch>
         </BrowserRouter>
     );

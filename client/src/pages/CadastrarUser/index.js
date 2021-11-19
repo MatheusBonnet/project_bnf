@@ -13,7 +13,7 @@ export default function CadastrarUser(){
     const [endereco, setEndereco] = useState('');
     const [password, setPassword] = useState('');
 
-    localStorage.setItem("nome", nome);
+    sessionStorage.setItem("nome", nome);
     localStorage.setItem("cpf", cpf);
 
     const history = useHistory();

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -31,19 +32,21 @@ public class Products {
 	private String telefone;
 
 	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private Users users;
 	
 	
 	public Products() {
 	}
 
-	public Products(Long id, String descricao, String produto, Double valor, String telefone) {
+	public Products(Long id, String descricao, String produto, Double valor, String telefone, Users users) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
 		this.produto = produto;
 		this.valor = valor;
 		this.telefone = telefone;
+		this.users = users;
 	}
 
 	public Long getId() {

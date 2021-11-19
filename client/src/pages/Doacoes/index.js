@@ -12,7 +12,7 @@ export default function Doacoes(){
 
     const [doacoes, setDoacoes] = useState([]);
     const accessToken = localStorage.getItem('accessToken');
-
+    const nomeUser = sessionStorage.getItem('nome');
     const history = useHistory();
 
 
@@ -25,19 +25,6 @@ export default function Doacoes(){
             })
         } catch (error) {
             alert('Edit failed! Try again.');
-        }
-    }
-    async function deleteDoacao(id) {
-        try {
-            await api.delete(`doacoes/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            })
-
-            setDoacoes(doacoes.filter(doacao => doacao.id !== id))
-        } catch (err) {
-            alert('Delete failed! Try again.');
         }
     }
 
@@ -62,39 +49,54 @@ export default function Doacoes(){
             <header>
                 <img src = {logo} id = "logo"/>
 
-                <ul>
+                <ul class="cabecalho">
                     <li id="pq-doar"><Link to = {"/porqueDoar"}> PORQUE DOAR? </Link> </li>
                     <li id="view-donate"><Link to = {"/doacoes"}> VER DOAÇÕES </Link> </li>
                     <li id="donate-now"><Link to = {"/cadastrarDoacao"}> DOAR JÁ </Link> </li>
                 </ul>
 
-                <BiLogOut id = "btn-sair" onClick = {logout}/>
+                <Link to = {"/atualizarDados"}><BsPersonCircle id = "perfil"/></Link>
 
-                <Link to = {"users"}> <BsPersonCircle id = "perfil"/></Link>
+                <BiLogOut id = "btn-sair" onClick = {logout}/>
 
             </header>
         
             <h1>INICIAR DOAÇÃO</h1>
-            <h2>INCIE HOJE UMA NOVA DOAÇÃO</h2>
+            <h2>INICIE HOJE UMA NOVA DOAÇÃO</h2>
 
-            <ul>
-                {doacoes.map(doacao => 
-                    <li key = {doacao.id}>
-                        <strong>Tipo de Doação:</strong>
-                        <p>{doacao.produto}</p> <br></br>
+            <div class="control-doacao" value="caixaDoacao">
+                <ul class="caixa-doacao">
+                    {doacoes.map(doacao => 
+                        <li class="info-caixa-doacao" key = {doacao.id}>
+                            
+                            <div class="separa">
+                                <div class="tipo-doacao">
+                                    <strong>{nomeUser}</strong> está doando: {doacao.produto}
+                                </div> 
 
-                        <strong>Telefone:</strong>
-                        <p>{doacao.valor}</p><br></br>
+                                <div class="campo-lixeira">
+                                    <p id="ativo">Ativo</p>
+                                </div>
+                            </div>
 
-                        <strong>Valor:</strong>
-                        <p>{doacao.telefone}</p><br></br>
+                            <div class="qtde-doacao">
+                                <strong>Quantidade / Valor: </strong>
+                                {doacao.valor}
+                            </div>
 
-                        <strong>Descrição:</strong>                       
-                        <p>{doacao.descricao}</p><br></br>         
-                        
-                    </li>
-                )}
-            </ul>
+                            <div class="desc-doacao">
+                                <strong>Descrição: </strong>                       
+                                {doacao.descricao}        
+                            </div>
+                            
+                            <div class="tel-doacao">
+                                <a id="btn-cnt" href="{doacao.telefone}">ENTRE EM CONTATO</a>
+                            </div>
+
+                        </li>
+                    )}
+                </ul>
+            </div>
 
             
         </body>
