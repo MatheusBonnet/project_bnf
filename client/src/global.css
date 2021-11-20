@@ -109,7 +109,8 @@ main p{
 }
 #entrar-btn{
     margin-top: 20px;
-    margin-left: 19%;
+    margin-left: 1%;
+
 }
 #entrar-btn, #criar-btn,#salvar-btn, #input-contato{
     background: var(--header-color);
@@ -131,6 +132,22 @@ main p{
     cursor: pointer;
 }
 
+#dados-pessoais{
+    margin-left: 10%;
+    padding: 15px;
+    width: 50%;
+    background-color: #ececec;
+    border: 1px solid #d8d6d6;
+    margin-top: 3%;
+}
+.controla-campos{
+    width: 700%;
+    text-align: center;
+}
+.controla-perfil{
+    display: flex;
+}
+
 
 
 #senha, #user{
@@ -149,7 +166,7 @@ main p{
     font-size: .9em;
     margin-top: 20px;
     color: var(--border-color);
-    margin-left: -120px;
+    margin-left: 30px;
 }
 p{
     text-align: center;
@@ -226,13 +243,24 @@ span{
     flex-direction: column;
     display: flex;
     max-width: 25vw;
-    margin-left: 2%;
+    margin-left: 39%;
     background-color: #ececec;
     padding: 20px;
     border-radius: 5px;
     border: 1px solid #d8d6d6;
     margin-top: 4%;
 }
+
+#main-update{
+    width: 30%;
+    padding: 10px;
+    align-items: center;
+    text-align: center;
+    margin-top:50px;
+    display: flex;
+}
+
+
 #centro-cadastro-doacao{
     flex-direction: column;
     display: flex;
@@ -282,12 +310,10 @@ span{
     font-size: 50px;
 }
 .input-atualizar{
-    display: inline;
-    flex-direction: column;
+    display: flex;
     width: 100%;
     margin-bottom: 10px;
     height: 3vw;
-    border: 1px solid #d1d1d1;
 }
 #salvar-btn{
     width: 100%;
@@ -295,7 +321,15 @@ span{
 }
 /* FEED DE DOAÇÕES */
 .control-doacao{
+    width: 50%;
+    margin-left: 120%;
+
+}
+
+.control-doacao-feed{
     width: auto;
+    margin-left:5%;
+
 }
 .caixa-doacao{
     width: 50%;
@@ -334,7 +368,7 @@ span{
 }
 .desc-doacao{
     width: auto;
-    margin-bottom: 25px;
+    margin-bottom: 10px;
 }
 #btn-cnt{
     background: var(--header-color);
@@ -353,4 +387,30 @@ span{
 #ativo{
     color: var(--color-font);
     font-weight: 700;
+}
+/*doacoes perfil*/
+/* FEED DE DOAÇÕES */
+.control-doacao-perfil{
+    width: 50%;
+    margin-left: 10%;
+    margin-top: 3%;
+}
+
+.control-doacao-feed-perfil{
+    width: auto;
+}
+.caixa-doacao-perfil{
+    width: 95%;
+    height: auto;
+    padding: 10px 0px;
+}
+.info-caixa-doacao-perfil{
+    width: 95%;
+    background-color: #F4F4F4;
+    display: inline-table;
+    margin-bottom: 50px;
+    border: solid 1px #dddddd;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px 15px;
 }

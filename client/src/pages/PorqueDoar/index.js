@@ -27,9 +27,18 @@ export default function PorqueDoar(){
                 </div>
 
                 <h1>PORQUE DOAR?</h1>
-                <p id="txt-pq-doar">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci nisi, esse eveniet voluptatibus placeat 
-                odio maxime facilis! Aliquid, cupiditate nulla,
-                aperiam magni eius ea sequi aspernatur non, exercitationem explicabo ullam.</p>
+                <p id="txt-pq-doar">O ato de doar bens materiais geralmente é uma
+                    tarefa muito difícil. Muitas vezes nos apegamos emocionalmente aos
+                    nossos objetos e mantemos eles em casa mesmo quando já não têm mais
+                    utilidade… Quando se trata de roupas, o cenário se complica ainda
+                    mais. Não nos livramos de peças de roupa pensando que futuramente
+                    voltaremos a querer usá-las e elas ficam mofando (literalmente) até 
+                    que já estejam muito desgastadas para serem doadas.
+
+                    Além de liberar espaço nos armários e gavetas e ajudar os outros,
+                    doar faz bem para a saúde do doador. Segundo os estudos, realizar
+                    doações estimula a região do cérebro que nos dá prazer.
+                </p>
 
         </main>
 

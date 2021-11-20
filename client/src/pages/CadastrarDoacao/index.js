@@ -77,7 +77,7 @@ export default function CadastrarDoacao(){
                 value = {produto}
                 onChange = {e => setProduto(e.target.value)}
             />
-            <input type="" name="valor" id="tipo" class="input-cadastro" placeholder="  Deseja doar algum valor?"
+            <input type="" name="valor" id="tipo" class="input-cadastro" placeholder=" Qual a quantidade a ser doada?"
                 value = {valor}
                 onChange = {e => setValor(e.target.value)}
             />

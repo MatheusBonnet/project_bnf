@@ -22,7 +22,7 @@ export default function UpdateUser(){
     const {userId} = useParams();
 
 
-    async function loadUser() {
+   /* async function loadUser() {
         try {
             const response = await api.get(`users/${userId}`, {
                 headers: {
@@ -41,14 +41,13 @@ export default function UpdateUser(){
             alert('Erro ao recuperar o usuario! Tente novamente!');
             history.push('/atualizarDados');
         }   
-    }
+    }*/
 
     useEffect(() => {
         if (userId === '0') return;
-        else loadUser();
     }, [userId])
 
-    async function updateUser(e){
+   /* async function updateUser(e){
         e.preventDefault();
 
         const data = {
@@ -71,7 +70,7 @@ export default function UpdateUser(){
         } catch (err) {
             alert('Preencha todos os campos e tente novamente!!!');
         }
-    };
+    };*/
 
     useEffect(() => {
         api.get('doacoes' , {
@@ -123,15 +122,15 @@ export default function UpdateUser(){
                 <strong class="ola">Olá, {nomeUser}</strong>
             </div>
 
-    <main id="main-cadastro">
+    <div class="controla-perfil">
 
-        <section>
-            <div id="dados-pessoais">
+        <section id="dados-pessoais">
+            <div class="controla-campos">
 
                 <h1>SEUS DADOS</h1>
                 <h2>Dados Pessoais</h2>
 
-                <form onSubmit = {updateUser}>
+                <form class="form-update">
                     <input type="text" name="nome" id="nome" class="input-atualizar" placeholder="  Nome"
                         value = {nome}
                         onChange={e => setNome(e.target.value)}
@@ -159,10 +158,10 @@ export default function UpdateUser(){
 
         </section>
 
-        <div class="control-doacao">
-                <ul class="caixa-doacao">
+        <div class="control-doacao-perfil">
+                <ul class="caixa-doacao-perfil">
                     {doacoes.map(doacao => 
-                        <li class="info-caixa-doacao" key = {doacao.id}>
+                        <li class="info-caixa-doacao-perfil" key = {doacao.id}>
                             
                             <div class="separa">
                                 <div class="tipo-doacao">
@@ -189,7 +188,7 @@ export default function UpdateUser(){
                     )}
                 </ul>
             </div>
-    </main>
+    </div>
 
 
 

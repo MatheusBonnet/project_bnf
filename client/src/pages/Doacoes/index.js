@@ -64,7 +64,7 @@ export default function Doacoes(){
             <h1>INICIAR DOAÇÃO</h1>
             <h2>INICIE HOJE UMA NOVA DOAÇÃO</h2>
 
-            <div class="control-doacao" value="caixaDoacao">
+            <div class="control-doacao-feed" value="caixaDoacao">
                 <ul class="caixa-doacao">
                     {doacoes.map(doacao => 
                         <li class="info-caixa-doacao" key = {doacao.id}>
@@ -90,7 +90,8 @@ export default function Doacoes(){
                             </div>
                             
                             <div class="tel-doacao">
-                                <a id="btn-cnt" href="{doacao.telefone}">ENTRE EM CONTATO</a>
+                                <strong>Telefone para contato: </strong>                       
+                                {doacao.telefone}        
                             </div>
 
                         </li>
